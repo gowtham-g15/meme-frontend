@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import config from '../config';
 import '../styles/Signup.css';
 
 const Signup = ({ onSignup }) => {
@@ -42,7 +43,7 @@ const Signup = ({ onSignup }) => {
         email: formData.email 
       });
       
-      const response = await fetch('http://localhost:8080/api/auth/signup', {
+      const response = await fetch(`${config.API_BASE_URL}/api/auth/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
+import config from '../config';
 
 const debounce = (func, wait) => {
   let timeout;
@@ -19,9 +20,6 @@ const debounce = (func, wait) => {
   
   return debounced;
 };
-
-import { useNavigate } from 'react-router-dom';
-import '../styles/CreateMeme.css';
 
 const MEME_TEMPLATES = [
   { id: 1, name: 'One Does Not Simply', url: 'https://i.imgflip.com/1bij.jpg' },
@@ -47,7 +45,7 @@ const CreateMeme = () => {
         return;
       }
       
-      const response = await fetch('http://localhost:8080/api/memes/my', {
+      const response = await fetch(`${config.API_BASE_URL}/api/memes/my`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -84,7 +82,7 @@ const CreateMeme = () => {
         throw new Error('Not authenticated. Please log in to save memes.');
       }
       
-      const response = await fetch('http://localhost:8080/api/memes', {
+      const response = await fetch(`${config.API_BASE_URL}/api/memes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
